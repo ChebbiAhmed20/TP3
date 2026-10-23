@@ -1,9 +1,10 @@
 from fastapi import FastAPI
+from pydantic import BaseModel
+import socket
 
 from pydantic import BaseModel
 
 import socket
-
 
 app = FastAPI()
 
@@ -47,8 +48,23 @@ def greeting(name: str):
         "developer": "Dev2",
         "hostname": hostname,
         "IP": ip_address
-
     }
+
+items = [
+    {"id": 1, "name": "Item 1"},
+    {"id": 2, "name": "Item 2"}
+]
+
+@app.delete("/remove/{id}")
+def remove_item(id: int):
+    for item in items:
+        if item["id"] == id:
+            items.remove(item)
+            return {"message": "Item deleted", "id": id}
+
+    return {"message": "Item not found", "id": id}
+
+    
 class UpdateItem(BaseModel):
     name: str
 @app.put("/update/{id}")
