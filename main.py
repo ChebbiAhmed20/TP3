@@ -1,5 +1,9 @@
 from fastapi import FastAPI
+<<<<<<< HEAD
+from pydantic import BaseModel
+=======
 import socket
+>>>>>>> origin/main
 
 app = FastAPI()
 
@@ -14,6 +18,16 @@ def addition(a: int, b: int):
         "developer": "Dev1"
     }
 
+class MultiplyRequest(BaseModel):
+    a: int
+    b: int
+
+@app.post("/multiply")
+def multiply(data: MultiplyRequest):
+    return {
+        "result a*b=": data.a * data.b,
+        "developer": "Dev1"
+    }
 @app.get("/greeting")
 def greeting(name: str):
     hostname = socket.gethostname()
@@ -27,4 +41,5 @@ def greeting(name: str):
         "developer": "Dev2",
         "hostname": hostname,
         "IP": ip_address
+>>>>>>> origin/main
     }
