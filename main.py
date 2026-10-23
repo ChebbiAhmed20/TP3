@@ -1,9 +1,9 @@
 from fastapi import FastAPI
-<<<<<<< HEAD
+
 from pydantic import BaseModel
-=======
+
 import socket
->>>>>>> origin/main
+
 
 app = FastAPI()
 
@@ -28,6 +28,12 @@ def multiply(data: MultiplyRequest):
         "result a*b=": data.a * data.b,
         "developer": "Dev1"
     }
+@app.post("/divide")
+def divide(data: MultiplyRequest):
+    return {
+        "result a/b=": data.a / data.b,
+        "developer": "Dev1"
+    }
 @app.get("/greeting")
 def greeting(name: str):
     hostname = socket.gethostname()
@@ -41,5 +47,15 @@ def greeting(name: str):
         "developer": "Dev2",
         "hostname": hostname,
         "IP": ip_address
->>>>>>> origin/main
+
+    }
+class UpdateItem(BaseModel):
+    name: str
+@app.put("/update/{id}")
+def update_item(id: int, item: UpdateItem):
+    return {
+        "message": f"Item {id} mis à jour avec succès",
+        "id": id,
+        "updated_data": item,
+        "developer": "Dev2"
     }
