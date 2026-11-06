@@ -28,3 +28,8 @@ http://127.0.0.1:8000/
 
 http://127.0.0.1:8000/docs
 127.0.0.1
+## TP3: Intégration continue
+- Nouvel endpoint `/soustraction` + test unitaire dans `test_main.py`
+- Lancer les tests : `pytest -v`
+- Pipeline GitHub Actions (`.github/workflows/ci.yml`) : job `run-test`
+- Rapport JUnit (`report.xml`) sauvegardé comme artefact

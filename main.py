@@ -23,6 +23,13 @@ class MultiplyRequest(BaseModel):
     a: int
     b: int
 
+@app.get("/soustraction")
+def soustraction(a: int, b: int):
+    return {
+        "result a-b=": a - b,
+        "developer": "Dev2"
+    }
+
 @app.post("/multiply")
 def multiply(data: MultiplyRequest):
     return {
