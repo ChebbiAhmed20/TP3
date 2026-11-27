@@ -1,5 +1,6 @@
-# pylint: skip-file
+"""Unit tests for the FastAPI endpoints in main.py."""
 
+import pytest
 from fastapi.testclient import TestClient
 
 from main import app
@@ -30,6 +31,7 @@ def test_soustraction():
     ],
 )
 def test_soustraction_valeurs(a, b, expected):
+    """Teste la soustraction sur plusieurs jeux de valeurs."""
     response = client.get("/soustraction", params={"a": a, "b": b})
     assert response.status_code == 200
     assert response.json()["result a-b="] == expected
@@ -50,11 +52,13 @@ def test_soustraction_champ_developer():
 
 
 def test_soustraction_parametre_manquant():
+    """Verifie qu'un parametre manquant retourne 422."""
     response = client.get("/soustraction", params={"a": 5})
     assert response.status_code == 422
 
 
 def test_soustraction_parametre_invalide():
+    """Verifie qu'un parametre non entier retourne 422."""
     response = client.get("/soustraction", params={"a": "abc", "b": 2})
     assert response.status_code == 422
 
@@ -73,6 +77,7 @@ def test_addition_non_regression():
 
 
 def test_racine():
+    """Verifie que la route racine retourne le message attendu."""
     response = client.get("/")
     assert response.status_code == 200
     assert response.json() == {"message": "it works !"}
