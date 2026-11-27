@@ -1,4 +1,5 @@
-import pytest
+# pylint: skip-file
+
 from fastapi.testclient import TestClient
 
 from main import app
